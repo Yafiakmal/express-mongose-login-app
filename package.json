@@ -4,18 +4,23 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start-dev": "DEBUG=app:* nodemon ./api/app.js",
-    "build-dev": "npm install && DEBUG=app:* nodemon ./api/app.js"
+    "dev": "tsx watch src/app.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "cors": "^2.8.5",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.1",
+    "@types/mongoose": "^5.11.96",
+    "@types/node": "^22.14.1",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "morgan": "^1.10.0",
-    "nodemon": "^3.1.9"
+    "mongoose": "^8.13.2",
+    "nodemon": "^3.1.9",
+    "ts-node-dev": "^2.0.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3"
   }
 }
