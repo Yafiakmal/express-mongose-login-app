@@ -4,8 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start-dev": "DEBUG=app:* nodemon ./app.js",
-    "build-dev": "npm install && DEBUG=app:* nodemon ./app.js"
+    "start-dev": "DEBUG=app:* nodemon ./api/app.js",
+    "build-dev": "npm install && DEBUG=app:* nodemon ./api/app.js"
   },
   "keywords": [],
   "author": "",
