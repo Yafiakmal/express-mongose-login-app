@@ -7,7 +7,7 @@ import {
   errorResponse,
   successResponse,
 } from "../src/types/http_response.js";
-await connectDB();
+// await connectDB();
 
 const app = express();
 app.use(express.json());
