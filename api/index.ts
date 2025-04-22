@@ -4,26 +4,16 @@ import userRouter from "../src/routes/user.route.js";
 import authRouter from "../src/routes/auth.route.js";
 import { error } from "../src/label/error_label.js";
 import { errorResponse, successResponse } from "../src/types/http_response.js";
+import { createUser, getAllUsers } from "../src/services/db_user.js";
 await connectDB();
 
 const app = express();
 app.use(express.json());
 
-// PERCOBAAN
-import { createUser, getAllUsers } from "../src/services/db_user.js";
-
-
-console.info(await getAllUsers())
-
-
-// PERCOBAAN END
-
-
-
-
-
-app.get("/", (req, res) => {
-  res.send("http://localhost:3000/api/users");
+app.get("/", async (req, res) => {
+  res.json(
+    await getAllUsers()
+  )
 });
 
 app.use("/api/auth", authRouter);
