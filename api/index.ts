@@ -1,5 +1,5 @@
 import express from "express";
-import { connectDB } from "../src/models/db_config.js";
+import { connectDB } from "../src/config/db_config.js";
 import userRouter from "../src/routes/user.route.js";
 import authRouter from "../src/routes/auth.route.js";
 import { error } from "../src/label/error_label.js";
@@ -8,6 +8,19 @@ await connectDB();
 
 const app = express();
 app.use(express.json());
+
+// PERCOBAAN
+import { createUser, getAllUsers } from "../src/services/db_user.js";
+
+
+console.info(await getAllUsers())
+
+
+// PERCOBAAN END
+
+
+
+
 
 app.get("/", (req, res) => {
   res.send("http://localhost:3000/api/users");
