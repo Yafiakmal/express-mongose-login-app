@@ -4,7 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch api/index.ts"
+    "dev": "tsx watch api/index.ts",
+    "start" : "tsx api/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "nodemon": "^3.1.9",
     "ts-node-dev": "^2.0.0",
     "tsx": "^4.19.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vercel": "^41.6.1"
   }
 }
