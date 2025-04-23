@@ -7,10 +7,10 @@ import verify from '../controllers/auth/verify.js';
 
 const router = Router();
 
-router.get('/login', login);
-router.get('/register', register);
-router.get('/verify', verify);
-router.get('/refresh', refresh);
-router.get('/logout', logout);
+router.post('/login', login);
+router.post('/register', register);
+router.patch('/verify/:token', verify);
+router.post('/refresh', refresh);
+router.post('/logout', logout);
 
 export default router;
