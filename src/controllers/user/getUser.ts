@@ -6,6 +6,6 @@ import {
 } from "../../types/http_response.js";
 
 export default (req: express.Request, res: express.Response)=>{
-    console.log("/:id")
+    console.log("/api/users")
     res.json(successResponse("Get User Aman"));
 }

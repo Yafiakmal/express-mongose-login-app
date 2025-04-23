@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Main Route
-app.use("/", first_route)
+app.get("/", first_route)
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 

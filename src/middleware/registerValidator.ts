@@ -3,9 +3,9 @@ import { z } from "zod";
 
 // Schema validasi dengan Zod
 const registerSchema = z.object({
-  email: z.string().email("Email tidak valid"),
-  password: z.string().min(6, "Password minimal 6 karakter"),
-  username: z.string().min(1, "Nama wajib diisi"),
+  email: z.string().email("Invalid Email"),
+  password: z.string().min(6, "Minimal password 6 character"),
+  username: z.string().min(3, "Minimal username 3 character"),
 });
 
 export const validateRegister = (
