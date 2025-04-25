@@ -71,15 +71,12 @@ export async function isEmailExist(email: string): Promise<boolean> {
   }
 }
 
-// READ - Compare password
-export async function isPasswordValid(identifier: string, password: string): Promise<boolean> {
+// READ - Compare password by username
+export async function comparePassByUsername(username: string, password: string): Promise<boolean> {
   try {
-    const resU = await User.findOne({ username:identifier });
-    const resE = await User.findOne({ email:identifier });
+    const resU = await User.findOne({ username }).lean();
     if(resU){
       return await bcrypt.compare(password, resU.hpass)
-    }else if(resE){
-      return await bcrypt.compare(password, resE.hpass)
     }else{
       throw new Error(`username not found`);
     }
@@ -87,6 +84,21 @@ export async function isPasswordValid(identifier: string, password: string): Pro
     throw new Error(`Error compare user password: ${err}`);
   }
 }
+
+// READ - Compare password by username
+export async function comparePassByEmail(email: string, password: string): Promise<boolean> {
+  try {
+    const resU = await User.findOne({ email }).lean();
+    if(resU){
+      return await bcrypt.compare(password, resU.hpass)
+    }else{
+      throw new Error(`email not found`);
+    }
+  } catch (err) {
+    throw new Error(`Error compare user password: ${err}`);
+  }
+}
+
 
 // UPDATE - Update user data by ID
 export async function updateUser(
