@@ -1,6 +1,9 @@
 import express from "express";
 import { fileURLToPath } from "url";
 import path from 'path';
+import cookieParser from 'cookie-parser';
+
+
 import { connectDB } from "../src/config/db_config.js";
 import userRouter from "../src/routes/user.route.js";
 import authRouter from "../src/routes/auth.route.js";
@@ -20,6 +23,7 @@ app.set('views', path.join(__dirname, '../src/views'));   // folder views
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser())
 
 // Main Route
 app.get("/", first_route)

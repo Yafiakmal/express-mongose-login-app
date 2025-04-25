@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title><%= title %></title>
-  <style>
-    body { font-family: sans-serif; margin: 2rem; }
-    h1 { color: #333; }
-    p { font-size: 1.2rem; }
-  </style>
-</head>
-<body>
-  <h1><%= title %></h1>
-  <p>Selamat datang, <strong><%= name %></strong>!</p>
-  <h2>Api added</h2>
-  <code>POST /api/auth/register {username, email, password}</code><br>
-  <code>GET /api/auth/verify/:token </code>
-  <code>POST /api/auth/login {identifier, password} </code>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= title %></title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 2rem;
+      }
+      h1 {
+        color: #333;
+      }
+      p {
+        font-size: 1.2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Selamat datang, <strong><%= name %></strong>!</p>
+    <h2>Api added</h2>
+    <code>POST /api/auth/register {username, email, password}</code><br />
+    <code>GET /api/auth/verify/:token </code><br />
+    <code>POST /api/auth/login {identifier, password} </code><br />
+    <code>POST /api/auth/refresh cookies['refreshTokenRefresh']  </code><br />
+    <code>POST /api/auth/logout cookies['refreshTokenLogout']  </code><br />
+  </body>
 </html>
