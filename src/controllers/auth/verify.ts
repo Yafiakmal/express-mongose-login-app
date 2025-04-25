@@ -24,7 +24,10 @@ export default async (
         }
       }
       return res.status(400).json(errorResponse(error.URL_PARAMS_NOT_PROVIDED, 'internal error or please use valid verify code'))
-    } catch (error) {
-      next(error)
+    } catch (err) {
+      if(err instanceof jwt.JsonWebTokenError){
+        return res.status(400).json(errorResponse(error.INVALID_TOKEN_FORMAT, 'Please Check Your Token'))
+      }
+      next(err)
     }
 }
