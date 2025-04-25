@@ -16,8 +16,8 @@ const UserSchema: Schema<IUser> = new Schema({
   is_verified: { type: Boolean, default: false },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
-});
+},{ collection: 'users' } );
 
-// creating 
+// creating collection
 export const User = mongoose.model<IUser>('User', UserSchema);
 
