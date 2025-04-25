@@ -1,5 +1,7 @@
 import express from "express";
-import { createUser, getAllUsers } from "../../services/db_user.js";
+import 'dotenv/config'
+import jwt, {JwtPayload} from 'jsonwebtoken'
+import { updateUser } from "../../services/db_user.js";
 import { error } from "../../label/error_label.js";
 import {
   errorResponse,
@@ -11,6 +13,18 @@ export default async (
   res: express.Response,
   next: express.NextFunction
 ) => {
-    console.log("/verify")
-    res.json(successResponse("Verify Aman"));
+    try {
+      const verCode = req.params.token;
+      if(process.env.VERCODE_SECRET && verCode){
+        const decoded = jwt.verify(verCode, process.env.VERCODE_SECRET)
+        if(typeof decoded === 'object' && 'username' in decoded){
+          const {username} = decoded as JwtPayload
+          await updateUser(username, {is_verified:true})
+          return res.status(200).json(successResponse('You have successfully verify your email', {username, email:decoded.email}))
+        }
+      }
+      return res.status(400).json(errorResponse(error.URL_PARAMS_NOT_PROVIDED, 'internal error or please use valid verify code'))
+    } catch (error) {
+      next(error)
+    }
 }

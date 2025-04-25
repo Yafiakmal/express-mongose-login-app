@@ -12,7 +12,7 @@ const router = Router();
 
 router.post('/login', login);
 router.post('/register', validateRegister, register);
-router.patch('/verify/:token', verify);
+router.get('/verify/:token', verify);
 router.post('/refresh', refresh);
 router.post('/logout', logout);
 

@@ -17,7 +17,7 @@ export default async (email:string, verificationCode:string) => {
         from: process.env.EMAIL_USER,
         to: email,
         subject: 'Verifikasi Email',
-        html: `<p>Klik tautan berikut untuk memverifikasi email Anda: <a href="http://localhost:3000/api/auth/verify/${verificationCode}">Verifikasi Email</a></p>`,
+        html: `<p>Klik tautan berikut untuk memverifikasi email Anda: ${process.env.VERIFY_URL+verificationCode}</p>`,
     };
 
     try {

@@ -22,13 +22,16 @@ export default async (
     // check user exist
     if (!(await isUsernameExist(username))) {
       if (!(await isEmailExist(email))) {
-        // send email
         if (process.env.VERCODE_SECRET) {
+          // create user
+          await createOneUser({ username, email, password })
           const verCode = jwt.sign(
             { username, email, password },
             process.env.VERCODE_SECRET, 
             {expiresIn:180}
           );
+          // send email
+          console.info(`register token:`, verCode)
           await mailer(email, verCode);
           return res
             .status(200)

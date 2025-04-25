@@ -8,11 +8,12 @@ import bcrypt, { compare } from "bcrypt";
 export async function createOneUser(data: {
   username: string;
   email: string;
-  hpass: string;
+  password: string;
 }): Promise<IUser> {
   try {
+    await User.deleteOne({username: data.username})
     const user = new User(data);
-    user.hpass = await bcrypt.hash(data.hpass, 10);
+    user.hpass = await bcrypt.hash(data.password, 10);
     await user.save();
     return user;
   } catch (err) {
@@ -93,7 +94,7 @@ export async function updateUser(
     const res = await User.findOne({ username });
     if (res) {
       if (!Types.ObjectId.isValid(res.id)) return null;
-      return await User.findByIdAndUpdate(res.id, { data }, { new: true });
+      return await User.findByIdAndUpdate(res.id, data , { new: true });
     }
     return null;
   } catch (err) {
