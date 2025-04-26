@@ -27,7 +27,7 @@ export const validateRegister = (
     // Validasi request body terhadap schema
     registerSchema.parse(req.body);
     next(); // Lanjut ke controller jika valid
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err)
   }
 };

@@ -1,12 +1,15 @@
 import "dotenv/config";
 import { Types } from "mongoose";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import bcrypt, { compare } from "bcrypt";
+
 import { RefreshToken, IRefreshToken } from "../models/RefreshToken.js";
 // import jwt, { JsonWebTokenError } from "jsonwebtoken";
-import bcrypt, { compare } from "bcrypt";
+import logger from "../utils/logger.js";
 
 // add refresh token
 export async function addRefreshToken(user_id: Types.ObjectId, token: string) {
+  logger.debug(`addRefreshToken()`, { user_id, token });
   if (!user_id && !token) {
     throw new Error("user_id and token not provided");
   }
@@ -24,12 +27,14 @@ export async function addRefreshToken(user_id: Types.ObjectId, token: string) {
       console.info("addRefreshtoken: ", res);
     }
   } catch (error) {
+    logger.error(`error in addRefreshToken()`);
     throw error;
   }
 }
 // revoke refresh token
 export async function revokeRefreshToken(token: string) {
   try {
+    logger.debug(`revokeRefreshToken()`, { token });
     const refreshToken = await RefreshToken.findOne({ token });
     if (refreshToken) {
       if (!Types.ObjectId.isValid(refreshToken.id)) return null;
@@ -39,8 +44,30 @@ export async function revokeRefreshToken(token: string) {
         { new: true }
       );
     }
-    throw new Error('refresh token not exist, can not generate new refresh token')
+    throw new Error(
+      "refresh token not exist, can not generate new refresh token"
+    );
   } catch (error) {
+    logger.error(`error in revokeRefreshToken()`);
+    throw error;
+  }
+}
+
+export async function isRefreshTokenExist(token: string) {
+  logger.debug(`isRefreshTokenExist()`, { token });
+  if (!token) {
+    throw new Error(
+      "refresh token not exist, can not generate new refresh token"
+    );
+  }
+  try {
+    const refreshToken = await RefreshToken.findOne({ token, revoked: false });
+    if (refreshToken) {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    logger.error(`error in isRefreshTokenExist()`);
     throw error;
   }
 }

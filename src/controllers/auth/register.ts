@@ -10,6 +10,7 @@ import {
 import { error } from "../../label/error_label.js";
 import { errorResponse, successResponse } from "../../types/http_response.js";
 import mailer from "../../config/mailer.js";
+import logger from "../../utils/logger.js";
 
 export default async (
   req: express.Request,
@@ -17,6 +18,8 @@ export default async (
   next: express.NextFunction
 ) => {
   try {
+    logger.info(`${req.method} ${req.path}`,{path: req.path, method: req.method})
+    logger.debug(`${req.method} ${req.path}`,{path: req.path, method: req.method, body:req.body})
     const { username, email, password } = req.body;
 
     // check user exist
@@ -49,6 +52,7 @@ export default async (
         )
       );
   } catch (err) {
+    // logger.info(`${req.method} ${req.path}`,{error:err})
     next(err);
   }
 };

@@ -7,6 +7,8 @@ import {
   errorResponse,
   successResponse,
 } from "../../types/http_response.js";
+import logger from "../../utils/logger.js";
+
 
 export default async (
   req: express.Request,
@@ -14,6 +16,7 @@ export default async (
   next: express.NextFunction
 ) => {
     try {
+      logger.info(`${req.method} ${req.path}`,{path: req.path, method: req.method})
       const verCode = req.params.token;
       if(process.env.VERCODE_SECRET && verCode){
         const decoded = jwt.verify(verCode, process.env.VERCODE_SECRET)
@@ -25,9 +28,7 @@ export default async (
       }
       return res.status(400).json(errorResponse(error.URL_PARAMS_NOT_PROVIDED, 'internal error or please use valid verify code'))
     } catch (err) {
-      if(err instanceof jwt.JsonWebTokenError){
-        return res.status(400).json(errorResponse(error.INVALID_TOKEN_FORMAT, 'Please Check Your Token'))
-      }
+      // logger.error(`${req.method} ${req.path}`,{error:err})
       next(err)
     }
 }

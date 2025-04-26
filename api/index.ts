@@ -2,8 +2,11 @@ import express from "express";
 import { fileURLToPath } from "url";
 import path from 'path';
 import cookieParser from 'cookie-parser';
+// import morgan from 'morgan';
+// import { log } from "console";
 
 
+import logger from "../src/utils/logger.js";
 import { connectDB } from "../src/config/db_config.js";
 import userRouter from "../src/routes/user.route.js";
 import authRouter from "../src/routes/auth.route.js";
@@ -21,6 +24,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.set('views', path.join(__dirname, '../src/views'));   // folder views
 
+// const stream = {
+//   write: (message: string) => logger.http(message.trim()),
+// };
+
+// app.use(morgan('combined', { stream }));
+// app.use(morgan('combined'))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
@@ -32,6 +41,7 @@ app.use("/api/users", userRouter);
 
 // 404 Middleware
 app.use((req, res) => {
+  logger.debug('RES 404')
   res.status(404).json(errorResponse(error.NOT_FOUND, "path not found"));
 });
 
@@ -41,5 +51,5 @@ app.use(errorHandler);
 
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log(`Server running at http://localhost:${process.env.PORT}`);
+  logger.info(`Server running at port : ${process.env.PORT}`);
 });

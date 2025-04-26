@@ -6,14 +6,17 @@ import register from '../controllers/auth/register.js';
 import verify from '../controllers/auth/verify.js';
 
 // Middleware
+
 import { validateRegister } from '../middleware/registerValidator.js';
+import { validateLogin } from '../middleware/loginValidation.js';
+import isRefreshActive from '../middleware/isRefreshActive.js';
 
 const router = Router();
 
-router.post('/login', login);
+router.post('/r/login', isRefreshActive, validateLogin, login);
 router.post('/register', validateRegister, register);
 router.get('/verify/:token', verify);
-router.post('/refresh', refresh);
-router.post('/logout', logout);
+router.post('/r/refresh', refresh);
+router.post('/r/logout', logout);
 
 export default router;

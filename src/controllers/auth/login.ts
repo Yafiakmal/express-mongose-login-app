@@ -18,6 +18,7 @@ import {
 } from "../../services/token.js";
 import { error } from "../../label/error_label.js";
 import { errorResponse, successResponse } from "../../types/http_response.js";
+import logger from "../../utils/logger.js";
 
 export default async (
   req: express.Request,
@@ -25,6 +26,8 @@ export default async (
   next: express.NextFunction
 ) => {
   try {
+    logger.info(`${req.method} ${req.path}`,{path: req.path, method: req.method})
+    logger.debug(`${req.method} ${req.path}`,{path: req.path, method: req.method, body:req.body})
     const { identifier, password } = req.body;
     // check username/email exist
     if (await isEmailExist(identifier)) {
@@ -38,14 +41,7 @@ export default async (
           res,
           "refreshTokenRefresh",
           token,
-          "/api/auth/refresh",
-          parseInt(process.env.JWT_RT_SECRET_EXPIN || "604800") * 1000
-        );
-        setRefreshTokenCookie(
-          res,
-          "refreshTokenLogout",
-          token,
-          "/api/auth/logout",
+          "/api/auth/r",
           parseInt(process.env.JWT_RT_SECRET_EXPIN || "604800") * 1000
         );
 
@@ -70,14 +66,7 @@ export default async (
           res,
           "refreshTokenRefresh",
           token,
-          "/api/auth/refresh",
-          parseInt(process.env.JWT_RT_SECRET_EXPIN || "604800") * 1000
-        );
-        setRefreshTokenCookie(
-          res,
-          "refreshTokenLogout",
-          token,
-          "/api/auth/logout",
+          "/api/auth/r",
           parseInt(process.env.JWT_RT_SECRET_EXPIN || "604800") * 1000
         );
 
@@ -96,7 +85,7 @@ export default async (
       .status(400)
       .json(errorResponse(error.INVALID_CREDENTIALS, "Credential Not Match"));
   } catch (err) {
-    console.error(`Error at login :`, err);
+    // logger.error(`${req.method} ${req.path}`,{err:err})
     next(err);
   }
 };

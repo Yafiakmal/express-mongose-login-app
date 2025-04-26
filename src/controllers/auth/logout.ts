@@ -6,9 +6,11 @@ import {
 } from "../../types/http_response.js";
 import { setRefreshTokenCookie } from "../../utils/cookie.js";
 import { revokeRefreshToken } from "../../services/db_refreshtoken.js";
+import logger from "../../utils/logger.js";
 
 export default async (req: express.Request, res: express.Response, next:express.NextFunction)=>{
     try {
+      logger.info(`${req.method} ${req.path}`,{path: req.path, method: req.method, cookies: req.cookies})
       const refreshToken = req.cookies['refreshTokenLogout'];
       // revoke refresh token
       await revokeRefreshToken(refreshToken)
@@ -17,6 +19,7 @@ export default async (req: express.Request, res: express.Response, next:express.
       setRefreshTokenCookie(res,"refreshTokenLogout", "","/api/auth/logout", 0)
       return res.status(200).json(successResponse('you have successfully logout'))
     } catch (error) {
+      // logger.error(`${req.method} ${req.path}`,{error:error})
       next(error)
     }
 }
