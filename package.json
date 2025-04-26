@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch api/index.ts",
-    "start": "tsx api/index.ts",
-    "test": "tsx --watch test/index.ts"
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "postinstall": "npm run build"
   },
   "keywords": [],
   "author": "",
