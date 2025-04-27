@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch api/index.ts",
-    "start": "tsc && node dist/api/index.js",
+    "build": "tsc && cp -r src/views dist/src/",
+    "start": "npm run build && node dist/api/index.js",
     "test": "node dist/test/index.js"
   },
   "keywords": [],

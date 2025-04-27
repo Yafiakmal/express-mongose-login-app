@@ -13,9 +13,9 @@ import isRefreshActive from '../middleware/isRefreshActive.js';
 
 const router = Router();
 
-router.post('/r/login', isRefreshActive, validateLogin, login);
 router.post('/register', validateRegister, register);
 router.get('/verify/:token', verify);
+router.post('/r/login', isRefreshActive, validateLogin, login);
 router.post('/r/refresh', refresh);
 router.post('/r/logout', logout);
 
