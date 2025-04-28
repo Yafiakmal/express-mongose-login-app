@@ -25,7 +25,7 @@ export const headerSchema = [
 
     try {
       if (!process.env.JWT_AT_SECRET) {
-        return next(new Error("secret key not provided"));
+        return next(new jwt.JsonWebTokenError("secret key not provided"));
       }
       const decoded = jwt.verify(token, process.env.JWT_AT_SECRET);
       // simpan payload kalau mau

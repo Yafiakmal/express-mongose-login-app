@@ -23,6 +23,7 @@
     <h2>Account Functional</h2>
     <code>POST /api/account/register body{username, email, password}</code><br />
     <code>PATCH /api/account/verify/:token </code><br />
+    <code>DELETE /api/account/remove body{password} header[Authorization] </code><br />
     <h2>Auth Functional</h2>
     <code>POST /api/auth/r/login body{identifier, password}, cookies['refreshTokenRefresh'] </code><br />
     <code>POST /api/auth/r/refresh cookies['refreshTokenRefresh']  </code><br />
