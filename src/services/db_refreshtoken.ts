@@ -71,3 +71,17 @@ export async function isRefreshTokenExist(token: string) {
     throw error;
   }
 }
+
+export async function removeUserRefreshToken(user_id: Types.ObjectId){
+  if (!user_id) {
+    throw new Error("user_id not provided");
+  }
+  try {
+    logger.debug('removeUserRefreshToken()', {user_id})
+    await RefreshToken.deleteMany({ user_id });
+ 
+  } catch (error) {
+    logger.error('Error in removeUserRefreshToken()')
+    throw error
+  }
+}

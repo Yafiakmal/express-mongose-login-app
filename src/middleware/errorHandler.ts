@@ -37,7 +37,7 @@ export default (
     });
     return res
       .status(500)
-      .json(errorResponse(error.INTERNAL_SERVER, error.INTERNAL_SERVER));
+      .json(errorResponse(error.INTERNAL_SERVER, err.message));
   }
 
   logger.error("Unknown error type", {

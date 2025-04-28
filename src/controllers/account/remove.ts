@@ -1,0 +1,39 @@
+import express from "express";
+import jwt from "jsonwebtoken";
+import "dotenv/config";
+
+import {
+  comparePassByEmail,
+  getUserByEmail,
+  deleteUser
+} from "../../services/db_user.js";
+import { error } from "../../label/error_label.js";
+import { errorResponse, successResponse } from "../../types/http_response.js";
+import logger from "../../utils/logger.js";
+import { header } from "express-validator";
+import { decode } from "punycode";
+import { removeUserRefreshToken } from "../../services/db_refreshtoken.js";
+
+export default async (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
+  try {
+    const { password } = req.body;
+    logger.info(`${req.method} ${req.path}`);
+    logger.debug(`${req.method} ${req.path}`, {
+      body: req.body,
+      header: req.headers,
+    });
+    const decoded = (req as any).decoded as jwt.JwtPayload;
+    if (decoded) {
+        const user = await deleteUser(decoded.username, password)
+        await removeUserRefreshToken(user?.id)
+        return res.status(200).json(successResponse('user deleted successfully', {username:user?.username}))
+    }
+    next(new Error('user data not provided'));
+  } catch (err) {
+    next(err);
+  }
+};
