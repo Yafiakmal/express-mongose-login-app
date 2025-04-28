@@ -16,7 +16,6 @@ import {
 import { setRefreshTokenCookie } from "../../utils/cookie.js";
 import { error } from "../../label/error_label.js";
 import { errorResponse, successResponse } from "../../types/http_response.js";
-import getUser from "../user/getUser.js";
 import logger from "../../utils/logger.js";
 
 export default async (

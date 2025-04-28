@@ -8,7 +8,7 @@ import cookieParser from 'cookie-parser';
 
 import logger from "../src/utils/logger.js";
 import { connectDB } from "../src/config/db_config.js";
-import userRouter from "../src/routes/user.route.js";
+import accountRouter from "../src/routes/account.route.js";
 import authRouter from "../src/routes/auth.route.js";
 import first_route from "../src/controllers/first_route.js";
 import errorHandler from "../src/middleware/errorHandler.js";
@@ -37,7 +37,7 @@ app.use(cookieParser())
 // Main Route
 app.get("/", first_route)
 app.use("/api/auth", authRouter);
-app.use("/api/users", userRouter);
+app.use("/api/account", accountRouter);
 
 // 404 Middleware
 app.use((req, res) => {

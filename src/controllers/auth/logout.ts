@@ -24,7 +24,7 @@ export default async (
       res,
       "refreshTokenRefresh",
       "",
-      "/api/auth/refresh",
+      "/api/auth/r",
       0
     );
     return res

@@ -21,10 +21,10 @@
     <p>It's me, <strong><%= name %></strong>!</p>
     <p>I make an api for login system with jwt access token and refresh token</p>
     <h2>Api added</h2>
-    <code>POST /api/auth/register {username, email, password}</code><br />
+    <code>POST /api/auth/register body{username, email, password}</code><br />
     <code>GET /api/auth/verify/:token </code><br />
-    <code>POST /api/auth/r/login {identifier, password} </code><br />
+    <code>POST /api/auth/r/login body{identifier, password}, cookies['refreshTokenRefresh'] </code><br />
     <code>POST /api/auth/r/refresh cookies['refreshTokenRefresh']  </code><br />
-    <code>POST /api/auth/r/logout cookies['refreshTokenLogout']  </code><br />
+    <code>POST /api/auth/r/logout cookies['refreshTokenRefresh']  </code><br />
   </body>
 </html>
