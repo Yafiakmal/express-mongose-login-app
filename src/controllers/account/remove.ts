@@ -13,6 +13,7 @@ import logger from "../../utils/logger.js";
 import { header } from "express-validator";
 import { decode } from "punycode";
 import { removeUserRefreshToken } from "../../services/db_refreshtoken.js";
+import { HttpError } from "../../error/HttpError.js";
 
 export default async (
   req: express.Request,
@@ -30,9 +31,9 @@ export default async (
     if (decoded) {
         const user = await deleteUser(decoded.username, password)
         await removeUserRefreshToken(user?.id)
-        return res.status(200).json(successResponse('user deleted successfully', {username:user?.username}))
+        return res.status(200).json(successResponse(200, 'user deleted successfully', [{username:user?.username}]))
     }
-    next(new Error('user data not provided'));
+    next(new jwt.JsonWebTokenError('Credential Not Provided'));
   } catch (err) {
     next(err);
   }

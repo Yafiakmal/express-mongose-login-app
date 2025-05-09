@@ -25,7 +25,7 @@ export async function generateAccessToken(payload: object) {
   return jwt.sign(tokenPayload, process.env.JWT_AT_SECRET);
 }
 
-export async function generateRefreshToken(payload: Record<string, any>) {
+export async function generateRefreshToken(payload: object) {
   logger.debug(`generateAccessToken()`, { payload });
   if (!process.env.JWT_RT_SECRET) {
     throw new Error("JWT refresh token secret is not defined");

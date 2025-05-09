@@ -1,30 +1,30 @@
 import { error } from "../label/error_label.js";
-export interface ErrorResponse<T = any[]> {
-  status: "error";
+export interface ErrorResponse {
+  status: number;
   label: error;
   message: string;
-  details?: T;
+  details?: any[];
 }
 
-export interface SuccessResponse<T = any[]> {
-  status: "success";
+export interface SuccessResponse {
+  status: number;
   message: string;
-  data?: T;
+  data?: any[];
 }
 
-export function errorResponse<Details>(label: error, msg: string, details?: any[]): ErrorResponse {
+export function errorResponse(status: number,label: error, msg: string, details?: any[] ): ErrorResponse{
   return {
-    status: "error",
-    label: label,
+    status,
+    label,
     message: msg,
-    details: details
+    details
   };
 }
 
-export function successResponse<T>(msg: string, data?: T): SuccessResponse<T> {
+export function successResponse(status: number, msg: string, data?: any[]): SuccessResponse {
   return {
-    status: "success",
+    status,
     message: msg,
-    data: data,
+    data,
   };
 }

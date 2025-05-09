@@ -16,7 +16,7 @@ export default async (
       method: req.method,
       cookies: req.cookies,
     });
-    const refreshToken = req.cookies["refreshTokenLogout"];
+    const refreshToken = req.cookies["refreshTokenRefresh"];
     // revoke refresh token
     await revokeRefreshToken(refreshToken);
     // set cookie refresh token
@@ -29,7 +29,7 @@ export default async (
     );
     return res
       .status(200)
-      .json(successResponse("You have successfully logout"));
+      .json(successResponse(200, "You have successfully logout"));
   } catch (error) {
     // logger.error(`${req.method} ${req.path}`,{error:error})
     next(error);

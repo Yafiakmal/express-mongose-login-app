@@ -19,6 +19,7 @@ import {
 import { error } from "../../label/error_label.js";
 import { errorResponse, successResponse } from "../../types/http_response.js";
 import logger from "../../utils/logger.js";
+import { HttpError } from "../../error/HttpError.js";
 
 export default async (
   req: express.Request,
@@ -26,8 +27,15 @@ export default async (
   next: express.NextFunction
 ) => {
   try {
-    logger.info(`${req.method} ${req.path}`,{path: req.path, method: req.method})
-    logger.debug(`${req.method} ${req.path}`,{path: req.path, method: req.method, body:req.body})
+    logger.info(`${req.method} ${req.path}`, {
+      path: req.path,
+      method: req.method,
+    });
+    logger.debug(`${req.method} ${req.path}`, {
+      path: req.path,
+      method: req.method,
+      body: req.body,
+    });
     const { identifier, password } = req.body;
     // check username/email exist
     if (await isEmailExist(identifier)) {
@@ -46,14 +54,22 @@ export default async (
         );
 
         return res.status(200).json(
-          successResponse("you have successfully login", {
-            accessToken: await generateAccessToken(payload),
-          })
+          successResponse(200, "you have successfully login", [
+            {
+              accessToken: await generateAccessToken(payload),
+            },
+          ])
         );
       }
       return res
         .status(400)
-        .json(errorResponse(error.INVALID_CREDENTIALS, "Credential Not Match"));
+        .json(
+          errorResponse(
+            400,
+            error.CREDENTIALS_INVALID_0,
+            "Credential Not Match"
+          )
+        );
       // error credential invalid
     } else if (await isUsernameExist(identifier)) {
       if (await comparePassByUsername(identifier, password)) {
@@ -71,19 +87,21 @@ export default async (
         );
 
         return res.status(200).json(
-          successResponse("you have successfully login", {
-            accessToken: await generateAccessToken(payload),
-          })
+          successResponse(200, "you have successfully login", [
+            {
+              accessToken: await generateAccessToken(payload),
+            },
+          ])
         );
       }
       // error credential invalid
-      return res
-        .status(400)
-        .json(errorResponse(error.INVALID_CREDENTIALS, "Credential Not Match"));
+      return next(
+        new HttpError(400, error.CREDENTIALS_INVALID_0, "Credential Not Match")
+      );
     }
-    return res
-      .status(400)
-      .json(errorResponse(error.INVALID_CREDENTIALS, "Credential Not Match"));
+    return next(
+      new HttpError(400, error.CREDENTIALS_INVALID_0, "Credential Not Match")
+    );
   } catch (err) {
     // logger.error(`${req.method} ${req.path}`,{err:err})
     next(err);

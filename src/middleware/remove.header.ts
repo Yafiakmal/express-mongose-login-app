@@ -20,7 +20,7 @@ export const headerSchema = [
     const token = authHeader && authHeader.split(" ")[1]; // ambil token setelah 'Bearer'
 
     if (!token) {
-      return res.status(401).json(errorResponse(error.TOKEN_NOT_PROVIDED, 'please provide token'));
+      return res.status(401).json(errorResponse(401,error.TOKEN_NOT_PROVIDED_0, 'please provide token'));
     }
 
     try {
@@ -32,7 +32,7 @@ export const headerSchema = [
       (req as any).decoded = decoded;
       next();
     } catch (err) {
-      return next(err);
+      next(err);
     }
   },
 ];

@@ -8,6 +8,7 @@ import {
   successResponse,
 } from "../../types/http_response.js";
 import logger from "../../utils/logger.js";
+import { HttpError } from "../../error/HttpError.js";
 
 
 export default async (
@@ -23,10 +24,11 @@ export default async (
         if(typeof decoded === 'object' && 'username' in decoded){
           const {username} = decoded as JwtPayload
           await updateUser(username, {is_verified:true})
-          return res.status(200).json(successResponse('You have successfully verify your email', {username, email:decoded.email}))
+          return res.status(200).json(successResponse(200, 'You have successfully verify your email', [{username, email:decoded.email}]))
         }
       }
-      return res.status(400).json(errorResponse(error.URL_PARAMS_NOT_PROVIDED, 'internal error or please use valid verify code'))
+      return next(new HttpError(401,error.URL_PARAMS_NOT_PROVIDED_0, 'internal error or please use valid verify code'))
+      // return res.status(400).json(errorResponse(400,error.URL_PARAMS_NOT_PROVIDED, 'internal error or please use valid verify code'))
     } catch (err) {
       // logger.error(`${req.method} ${req.path}`,{error:err})
       next(err)

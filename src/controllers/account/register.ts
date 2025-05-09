@@ -11,6 +11,7 @@ import { error } from "../../label/error_label.js";
 import { errorResponse, successResponse } from "../../types/http_response.js";
 import mailer from "../../config/mailer.js";
 import logger from "../../utils/logger.js";
+import { HttpError } from "../../error/HttpError.js";
 
 export default async (
   req: express.Request,
@@ -38,21 +39,13 @@ export default async (
           await mailer(email, verCode);
           return res
             .status(200)
-            .json(successResponse(`Email are sent to ${email}`));
+            .json(successResponse(200, `Email are sent to ${email}`));
         }
         next(new Error("Environment variable are not set"));
       }
     }
-    res
-      .status(401)
-      .json(
-        errorResponse(
-          error.EXISTING_CREDENTIALS,
-          `Username Or Email Already Exist`
-        )
-      );
+    return next(new HttpError(401, error.CREDENTIALS_EXIST_0, `Username Or Email Already Exist`))
   } catch (err) {
-    // logger.info(`${req.method} ${req.path}`,{error:err})
     next(err);
   }
 };
