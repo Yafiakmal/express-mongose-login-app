@@ -14,6 +14,7 @@ import first_route from "../src/controllers/first_route.js";
 import errorHandler from "../src/middleware/errorHandler.js";
 import { errorResponse } from "../src/types/http_response.js";
 import { error } from "../src/label/error_label.js";
+import { HttpError } from "../src/error/HttpError.js";
 
 await connectDB();
 
@@ -40,9 +41,10 @@ app.use("/api/auth", authRouter);
 app.use("/api/account", accountRouter);
 
 // 404 Middleware
-app.use((req, res) => {
+app.use((req, res, next) => {
   logger.debug('RES 404')
-  res.status(404).json(errorResponse(error.NOT_FOUND, "path not found"));
+  // return next(new HttpError(404,error.NOT_FOUND, "path not found"))
+  res.status(404).json(errorResponse(404,error.NOT_FOUND, "path not found"));
 });
 
 // Error Middleware
