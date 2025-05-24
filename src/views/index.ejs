@@ -155,11 +155,11 @@ curl -X POST https://express-mongose-login-app.up.railway.app/api/account/regist
       <div class="code-container">
         <div class="code-header">
           <span>PATCH /account/verify</span>
-          <button class="copy-btn" onclick="copyCode(this, 'code1')">
+          <button class="copy-btn" onclick="copyCode(this, 'code2')">
             Copy
           </button>
         </div>
-        <pre class="code-block" id="code1">
+        <pre class="code-block" id="code2">
 curl -X PATCH https://express-mongose-login-app.up.railway.app/api/account/verify/YOUR_VERIFICATION_TOKEN_FROR_REGISTRATION
 </pre
         >
@@ -175,11 +175,11 @@ curl -X PATCH https://express-mongose-login-app.up.railway.app/api/account/verif
       <div class="code-container">
         <div class="code-header">
           <span>DELETE /account/remove</span>
-          <button class="copy-btn" onclick="copyCode(this, 'code1')">
+          <button class="copy-btn" onclick="copyCode(this, 'code3')">
             Copy
           </button>
         </div>
-        <pre class="code-block" id="code1">
+        <pre class="code-block" id="code3">
 curl -X DELETE https://express-mongose-login-app.up.railway.app/api/account/remove \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6ImpvaG5fZG9lIiwiaWF0IjoxNzQ4MDk0MjgzLCJleHAiOjE3NDgwOTQ1ODN9.QEuxXb1YWbBCO9us-rX3tMBSfZyyLUsH2ehFc5QdN6Q" \
@@ -206,11 +206,11 @@ curl -X DELETE https://express-mongose-login-app.up.railway.app/api/account/remo
       <div class="code-container">
         <div class="code-header">
           <span>POST /auth/r/login</span>
-          <button class="copy-btn" onclick="copyCode(this, 'code1')">
+          <button class="copy-btn" onclick="copyCode(this, 'code4')">
             Copy
           </button>
         </div>
-        <pre class="code-block" id="code1">
+        <pre class="code-block" id="code4">
 curl -X POST https://express-mongose-login-app.up.railway.app/api/auth/r/login \
   -H "Content-Type: application/json" \
   -c cookies.txt \
@@ -234,11 +234,11 @@ curl -X POST https://express-mongose-login-app.up.railway.app/api/auth/r/login \
       <div class="code-container">
         <div class="code-header">
           <span>POST /auth/r/refresh</span>
-          <button class="copy-btn" onclick="copyCode(this, 'code1')">
+          <button class="copy-btn" onclick="copyCode(this, 'code5')">
             Copy
           </button>
         </div>
-        <pre class="code-block" id="code1">
+        <pre class="code-block" id="code5">
 curl -X POST https://express-mongose-login-app.up.railway.app/api/auth/r/refresh \
   -b cookies.txt
 </pre
@@ -258,11 +258,11 @@ curl -X POST https://express-mongose-login-app.up.railway.app/api/auth/r/refresh
       <div class="code-container">
         <div class="code-header">
           <span>POST /auth/r/logout</span>
-          <button class="copy-btn" onclick="copyCode(this, 'code1')">
+          <button class="copy-btn" onclick="copyCode(this, 'code6')">
             Copy
           </button>
         </div>
-        <pre class="code-block" id="code1">
+        <pre class="code-block" id="code6">
 curl -X POST https://express-mongose-login-app.up.railway.app/api/auth/r/logout \
   -b cookies.txt
 </pre
