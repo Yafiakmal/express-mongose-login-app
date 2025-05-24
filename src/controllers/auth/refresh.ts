@@ -3,22 +3,21 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import { Types } from "mongoose";
 
-import { getUserByEmail } from "../../services/db_user";
+import { getUserByEmail } from "../../services/db_user.js";
 import {
   generateAccessToken,
   generateRefreshToken,
-} from "../../services/token";
+} from "../../services/token.js";
 import {
   revokeRefreshToken,
   addRefreshToken,
   isRefreshTokenExist,
-} from "../../services/db_refreshtoken";
-import { setRefreshTokenCookie } from "../../utils/cookie";
-import { error } from "../../label/error_label";
-import { errorResponse, successResponse } from "../../types/http_response";
-import logger from "../../utils/logger";
-import { HttpError } from "../../error/HttpError";
-import { ref } from "process";
+} from "../../services/db_refreshtoken.js";
+import { setRefreshTokenCookie } from "../../utils/cookie.js";
+import { error } from "../../label/error_label.js";
+import { errorResponse, successResponse } from "../../types/http_response.js";
+import logger from "../../utils/logger.js";
+import { HttpError } from "../../error/HttpError.js";
 
 export default async (
   req: express.Request,

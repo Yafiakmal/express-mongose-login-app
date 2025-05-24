@@ -1,5 +1,5 @@
-import { error } from "../label/error_label";
-import { ErrorResponse } from "../types/http_response";
+import { error } from "../label/error_label.js";
+import { ErrorResponse } from "../types/http_response.js";
 
 export class HttpError extends Error implements ErrorResponse {
   label: error;

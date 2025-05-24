@@ -1,7 +1,7 @@
 import "dotenv/config";
 import jwt from "jsonwebtoken";
 
-import logger from "../utils/logger";
+import logger from "../utils/logger.js";
 
 export async function generateAccessToken(payload: object) {
   logger.debug(`generateAccessToken()`, { payload });

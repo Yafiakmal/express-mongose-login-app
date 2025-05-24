@@ -1,8 +1,8 @@
 import express from "express";
 
-import logger from "../utils/logger";
-import { error } from "../label/error_label";
-import { errorResponse, successResponse } from "../types/http_response";
+import logger from "../utils/logger.js";
+import { error } from "../label/error_label.js";
+import { errorResponse, successResponse } from "../types/http_response.js";
 
 export default async (
   req: express.Request,

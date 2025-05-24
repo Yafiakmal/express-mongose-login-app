@@ -1,11 +1,11 @@
 import express from "express";
 import jwt from "jsonwebtoken";
-import { error } from "../label/error_label";
+import { error } from "../label/error_label.js";
 import { z } from "zod";
 import { fromError } from 'zod-validation-error';
-import { errorResponse } from "../types/http_response";
-import { HttpError } from "../error/HttpError";
-import logger from "../utils/logger";
+import { errorResponse } from "../types/http_response.js";
+import { HttpError } from "../error/HttpError.js";
+import logger from "../utils/logger.js";
 
 export default (
   err: Error,

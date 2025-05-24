@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import { IUser } from './User';
+import { IUser } from './User.js';
 
 export interface IRefreshToken extends Document {
   user_id: mongoose.Types.ObjectId | IUser;

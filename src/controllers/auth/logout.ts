@@ -1,9 +1,9 @@
 import express from "express";
-import { error } from "../../label/error_label";
-import { errorResponse, successResponse } from "../../types/http_response";
-import { setRefreshTokenCookie } from "../../utils/cookie";
-import { revokeRefreshToken } from "../../services/db_refreshtoken";
-import logger from "../../utils/logger";
+import { error } from "../../label/error_label.js";
+import { errorResponse, successResponse } from "../../types/http_response.js";
+import { setRefreshTokenCookie } from "../../utils/cookie.js";
+import { revokeRefreshToken } from "../../services/db_refreshtoken.js";
+import logger from "../../utils/logger.js";
 
 export default async (
   req: express.Request,

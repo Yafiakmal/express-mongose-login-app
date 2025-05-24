@@ -6,14 +6,12 @@ import {
   comparePassByEmail,
   getUserByEmail,
   deleteUser
-} from "../../services/db_user";
-import { error } from "../../label/error_label";
-import { errorResponse, successResponse } from "../../types/http_response";
-import logger from "../../utils/logger";
-import { header } from "express-validator";
-import { decode } from "punycode";
-import { removeUserRefreshToken } from "../../services/db_refreshtoken";
-import { HttpError } from "../../error/HttpError";
+} from "../../services/db_user.js";
+import { error } from "../../label/error_label.js";
+import { errorResponse, successResponse } from "../../types/http_response.js";
+import logger from "../../utils/logger.js";
+import { removeUserRefreshToken } from "../../services/db_refreshtoken.js";
+import { HttpError } from "../../error/HttpError.js";
 
 export default async (
   req: express.Request,

@@ -3,9 +3,9 @@ import { Types } from "mongoose";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import bcrypt, { compare } from "bcrypt";
 
-import { RefreshToken, IRefreshToken } from "../models/RefreshToken";
+import { RefreshToken, IRefreshToken } from "../models/RefreshToken.js";
 // import jwt, { JsonWebTokenError } from "jsonwebtoken";
-import logger from "../utils/logger";
+import logger from "../utils/logger.js";
 
 // add refresh token
 export async function addRefreshToken(user_id: Types.ObjectId, token: string) {
