@@ -1,14 +1,14 @@
 import express from "express";
 import 'dotenv/config'
 import jwt, {JwtPayload} from 'jsonwebtoken'
-import { updateUser } from "../../services/db_user.js";
-import { error } from "../../label/error_label.js";
+import { updateUser } from "../../services/db_user";
+import { error } from "../../label/error_label";
 import {
   errorResponse,
   successResponse,
-} from "../../types/http_response.js";
-import logger from "../../utils/logger.js";
-import { HttpError } from "../../error/HttpError.js";
+} from "../../types/http_response";
+import logger from "../../utils/logger";
+import { HttpError } from "../../error/HttpError";
 
 
 export default async (

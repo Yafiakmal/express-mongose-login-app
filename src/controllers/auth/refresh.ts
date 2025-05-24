@@ -3,21 +3,22 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import { Types } from "mongoose";
 
-import { getUserByEmail } from "../../services/db_user.js";
+import { getUserByEmail } from "../../services/db_user";
 import {
   generateAccessToken,
   generateRefreshToken,
-} from "../../services/token.js";
+} from "../../services/token";
 import {
   revokeRefreshToken,
   addRefreshToken,
   isRefreshTokenExist,
-} from "../../services/db_refreshtoken.js";
-import { setRefreshTokenCookie } from "../../utils/cookie.js";
-import { error } from "../../label/error_label.js";
-import { errorResponse, successResponse } from "../../types/http_response.js";
-import logger from "../../utils/logger.js";
-import { HttpError } from "../../error/HttpError.js";
+} from "../../services/db_refreshtoken";
+import { setRefreshTokenCookie } from "../../utils/cookie";
+import { error } from "../../label/error_label";
+import { errorResponse, successResponse } from "../../types/http_response";
+import logger from "../../utils/logger";
+import { HttpError } from "../../error/HttpError";
+import { ref } from "process";
 
 export default async (
   req: express.Request,
@@ -37,6 +38,16 @@ export default async (
         return next(new Error("environment variable not set"));
       }
       jwt.verify(refreshToken, process.env.JWT_RT_SECRET);
+
+      if (!(await isRefreshTokenExist(refreshToken))) {
+        return next(
+          new HttpError(
+            400,
+            error.TOKEN_NOT_PROVIDED_0,
+            "please provide the refresh token"
+          )
+        );
+      }
       const payload = jwt.decode(refreshToken) as jwt.JwtPayload;
       const user = await getUserByEmail(payload.email);
       delete payload.exp;

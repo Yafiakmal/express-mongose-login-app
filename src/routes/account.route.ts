@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import register from '../controllers/account/register.js';
-import verify from '../controllers/account/verify.js';
+import register from '../controllers/account/register';
+import verify from '../controllers/account/verify';
 // Middleware
-import { validateRegister } from '../middleware/register.input.js';
-import { headerSchema } from '../middleware/remove.header.js';
-import remove from '../controllers/account/remove.js';
-import { validateRemove } from '../middleware/remove.input.js';
+import { validateRegister } from '../middleware/register.input';
+import { headerSchema } from '../middleware/remove.header';
+import remove from '../controllers/account/remove';
+import { validateRemove } from '../middleware/remove.input';
 const router = Router();
 router.post('/register', validateRegister, register);
 router.patch('/verify/:token', verify);

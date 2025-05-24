@@ -2,7 +2,7 @@ import express from "express";
 import bcrypt from "bcrypt";
 import { Types } from "mongoose";
 
-import { setRefreshTokenCookie } from "../../utils/cookie.js";
+import { setRefreshTokenCookie } from "../../utils/cookie";
 import {
   isUsernameExist,
   isEmailExist,
@@ -10,16 +10,16 @@ import {
   comparePassByEmail,
   getUserByEmail,
   getUserByUsername,
-} from "../../services/db_user.js";
-import { addRefreshToken } from "../../services/db_refreshtoken.js";
+} from "../../services/db_user";
+import { addRefreshToken } from "../../services/db_refreshtoken";
 import {
   generateAccessToken,
   generateRefreshToken,
-} from "../../services/token.js";
-import { error } from "../../label/error_label.js";
-import { errorResponse, successResponse } from "../../types/http_response.js";
-import logger from "../../utils/logger.js";
-import { HttpError } from "../../error/HttpError.js";
+} from "../../services/token";
+import { error } from "../../label/error_label";
+import { errorResponse, successResponse } from "../../types/http_response";
+import logger from "../../utils/logger";
+import { HttpError } from "../../error/HttpError";
 
 export default async (
   req: express.Request,

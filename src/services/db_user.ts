@@ -1,10 +1,10 @@
-import { User, IUser } from "../models/User.js";
+import { User, IUser } from "../models/User";
 import { Types } from "mongoose";
 import "dotenv/config";
 // import jwt, { JsonWebTokenError } from "jsonwebtoken";
 import bcrypt, { compare } from "bcrypt";
 
-import logger from "../utils/logger.js";
+import logger from "../utils/logger";
 
 // CREATE
 export async function createOneUser(data: {

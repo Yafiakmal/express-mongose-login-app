@@ -3,8 +3,8 @@ import { Request, Response, NextFunction } from "express";
 import { header, validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 
-import { errorResponse } from "../types/http_response.js";
-import { error } from "../label/error_label.js";
+import { errorResponse } from "../types/http_response";
+import { error } from "../label/error_label";
 
 export const headerSchema = [
   header("authorization")

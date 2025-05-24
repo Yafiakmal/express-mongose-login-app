@@ -6,12 +6,12 @@ import {
   getAllUsers,
   isUsernameExist,
   isEmailExist,
-} from "../../services/db_user.js";
-import { error } from "../../label/error_label.js";
-import { errorResponse, successResponse } from "../../types/http_response.js";
-import mailer from "../../config/mailer.js";
-import logger from "../../utils/logger.js";
-import { HttpError } from "../../error/HttpError.js";
+} from "../../services/db_user";
+import { error } from "../../label/error_label";
+import { errorResponse, successResponse } from "../../types/http_response";
+import mailer from "../../config/mailer";
+import logger from "../../utils/logger";
+import { HttpError } from "../../error/HttpError";
 
 export default async (
   req: express.Request,
@@ -39,7 +39,7 @@ export default async (
           await mailer(email, verCode);
           return res
             .status(200)
-            .json(successResponse(200, `Email are sent to ${email}`));
+            .json(successResponse(200, `verification code are sent to ${email}`, [{example_verification_code:verCode}]));
         }
         next(new Error("Environment variable are not set"));
       }

@@ -1,4 +1,4 @@
-import { error } from "../label/error_label.js";
+import { error } from "../label/error_label";
 export interface ErrorResponse {
   status: number;
   label: error;

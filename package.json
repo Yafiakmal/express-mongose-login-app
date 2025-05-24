@@ -7,7 +7,7 @@
     "dev": "tsx watch api/index.ts",
     "build": "tsc && cp -r src/views dist/src/",
     "start": "npm run build && node dist/api/index.js",
-    "test": "node dist/test/index.js"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -36,6 +36,7 @@
     "@types/cookie-parser": "^1.4.8",
     "@types/dotenv": "^8.2.3",
     "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.14",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.9",
@@ -43,8 +44,10 @@
     "@types/nodemailer": "^6.4.17",
     "@types/pino": "^7.0.4",
     "@types/winston": "^2.4.4",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.9",
     "pino-pretty": "^13.0.0",
+    "ts-jest": "^29.3.4",
     "ts-node-dev": "^2.0.0",
     "tsx": "^4.19.3",
     "typescript": "^5.8.3"

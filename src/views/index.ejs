@@ -1,32 +1,411 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kode yang Bisa Disalin</title>
     <style>
       body {
-        font-family: sans-serif;
-        margin: 2rem;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 20px;
       }
-      h1 {
-        color: #333;
+
+      .code-container {
+        position: relative;
+        margin: 20px 0;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
-      p {
-        font-size: 1.2rem;
+
+      .code-header {
+        background-color: #2d3748;
+        color: white;
+        padding: 10px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+      }
+
+      .code-block {
+        background-color: #1a202c;
+        color: #e2e8f0;
+        padding: 20px;
+        font-family: "Courier New", Consolas, "Liberation Mono", monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        overflow-x: auto;
+        white-space: pre;
+        margin: 0;
+      }
+
+      .copy-btn {
+        background-color: #4299e1;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: background-color 0.3s;
+      }
+
+      .copy-btn:hover {
+        background-color: #3182ce;
+      }
+
+      .copy-btn.copied {
+        background-color: #48bb78;
+      }
+
+      /* Syntax highlighting untuk JavaScript */
+      .keyword {
+        color: #f7fafc;
+        font-weight: bold;
+      }
+      .string {
+        color: #68d391;
+      }
+      .comment {
+        color: #a0aec0;
+        font-style: italic;
+      }
+      .function {
+        color: #63b3ed;
+      }
+      .number {
+        color: #fbb6ce;
+      }
+
+      /* Style untuk inline code */
+      .inline-code {
+        background-color: #e2e8f0;
+        color: #2d3748;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: "Courier New", monospace;
+        font-size: 0.9em;
+      }
+
+      /* Style untuk code yang bisa diseleksi */
+      .selectable-code {
+        background-color: #f7fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 4px;
+        padding: 15px;
+        font-family: "Courier New", monospace;
+        white-space: pre-wrap;
+        user-select: all;
+        cursor: text;
+        margin: 10px 0;
+      }
+
+      .section {
+        background: white;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        color: #2d3748;
+        border-bottom: 2px solid #4299e1;
+        padding-bottom: 5px;
       }
     </style>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>It's me, <strong><%= name %></strong>!</p>
-    <p>I make an api for login system with jwt access token and refresh token</p>
-    <h2>Account Functional</h2>
-    <code>POST /api/account/register body{username, email, password}</code><br />
-    <code>PATCH /api/account/verify/:token </code><br />
-    <code>DELETE /api/account/remove body{password} header[Authorization] </code><br />
-    <h2>Auth Functional</h2>
-    <code>POST /api/auth/r/login body{identifier, password}, cookies['refreshTokenRefresh'] </code><br />
-    <code>POST /api/auth/r/refresh cookies['refreshTokenRefresh']  </code><br />
-    <code>POST /api/auth/r/logout cookies['refreshTokenRefresh']  </code><br />
+    <h1>JWT AUTHENTICATION REST API WITH EXPRESS AND MONGODB</h1>
+
+    <div class="section">
+      <h2>Account Functional</h2>
+      <h3>1. POST /account/register</h3>
+      <p>For Register Your Account</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>POST /account/register</span>
+          <button class="copy-btn" onclick="copyCode(this, 'code1')">
+            Copy
+          </button>
+        </div>
+        <pre class="code-block" id="code1">
+curl -X POST https://express-mongose-login-app.up.railway.app/api/account/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "john_doe",
+    "email": "john@example.com",
+    "password": "mySecurePassword123"
+  }'
+</pre
+        >
+      </div>
+      <p>Example Success Response:</p>
+      <div class="selectable-code">
+        {"status":200,"message":"email are sent to john@example.com"}%
+      </div>
+
+      <h3>2. PATCH /account/verify</h3>
+      <p>For Verify Your Email You Sent in Register</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>PATCH /account/verify</span>
+          <button class="copy-btn" onclick="copyCode(this, 'code1')">
+            Copy
+          </button>
+        </div>
+        <pre class="code-block" id="code1">
+curl -X PATCH https://express-mongose-login-app.up.railway.app/api/account/verify/YOUR_VERIFICATION_TOKEN_FROR_REGISTRATION
+</pre
+        >
+      </div>
+      <p>Example Success Response:</p>
+      <div class="selectable-code">
+        {"status":200,"message":"You have successfully verify your email","data":[{"username":"john_doe","email":"john@example.com"}]}% 
+      </div>
+
+      <h3>3. DELETE /account/remove</h3>
+      <p>To Remove Your Account From Database</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>DELETE /account/remove</span>
+          <button class="copy-btn" onclick="copyCode(this, 'code1')">
+            Copy
+          </button>
+        </div>
+        <pre class="code-block" id="code1">
+curl -X DELETE https://express-mongose-login-app.up.railway.app/api/account/remove \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6ImpvaG5fZG9lIiwiaWF0IjoxNzQ4MDk0MjgzLCJleHAiOjE3NDgwOTQ1ODN9.QEuxXb1YWbBCO9us-rX3tMBSfZyyLUsH2ehFc5QdN6Q" \
+  -d '{
+    "password": "mySecurePassword123"
+  }'
+
+</pre
+        >
+      </div>
+      <p>Example Success Response:</p>
+      <div class="selectable-code">
+        {"status":200,"message":"user deleted
+        successfully","data":[{"username":"john_doe"}]}%
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Authentication Functional</h2>
+      <h3>4. POST /auth/r/login</h3>
+      <p>To Get Access to Protected Api</p>
+      <p>Set Cookie in cookies.txt</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>POST /auth/r/login</span>
+          <button class="copy-btn" onclick="copyCode(this, 'code1')">
+            Copy
+          </button>
+        </div>
+        <pre class="code-block" id="code1">
+curl -X POST https://express-mongose-login-app.up.railway.app/api/auth/r/login \
+  -H "Content-Type: application/json" \
+  -c cookies.txt \
+  -d '{
+    "identifier": "john@example.com",
+    "password": "mySecurePassword123"
+  }'
+</pre
+        >
+      </div>
+      <p>Example Success Response:</p>
+      <div class="selectable-code">
+        {"status":200,"message":"you have successfully
+        login","data":[{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6ImpvaG5fZG9lIiwiaWF0IjoxNzQ4MDkyMjE5LCJleHAiOjE3NDgwOTI1MTl9.RGpzB1YnGPrUun5VB-U6RCBxSxWuj6-5s2OEveosIJs"}]}%
+      </div>
+
+      <h3>5. POST /auth/r/refresh</h3>
+      <p>To Refresh Access Token</p>
+      <p>Use Cookie in cookies.txt</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>POST /auth/r/refresh</span>
+          <button class="copy-btn" onclick="copyCode(this, 'code1')">
+            Copy
+          </button>
+        </div>
+        <pre class="code-block" id="code1">
+curl -X POST https://express-mongose-login-app.up.railway.app/api/auth/r/refresh \
+  -b cookies.txt
+</pre
+        >
+      </div>
+      <p>Example Success Response:</p>
+      <div class="selectable-code">
+        {"status":200,"message":"you have successfully
+        refresh","data":[{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6ImpvaG5fZG9lIiwiaWF0IjoxNzQ4MDkyOTAyLCJleHAiOjE3NDgwOTMyMDJ9.1obkpNOexpU02Df9opPk_eUtzD-jGjwVGWs4cwF0mt4"}]}%
+      </div>
+
+      <h3>6. POST /auth/r/logout</h3>
+      <p>To Logout</p>
+      <p>Use Cookie in cookies.txt</p>
+      <p>in Browser it will remove</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>POST /auth/r/logout</span>
+          <button class="copy-btn" onclick="copyCode(this, 'code1')">
+            Copy
+          </button>
+        </div>
+        <pre class="code-block" id="code1">
+curl -X POST https://express-mongose-login-app.up.railway.app/api/auth/r/logout \
+  -b cookies.txt
+</pre
+        >
+      </div>
+      <p>Example Success Response:</p>
+      <div class="selectable-code">
+        {"status":200,"message":"You have successfully logout"}%
+      </div>
+    </div>
+    <!-- <div class="section">
+      <h2>2. HTML Code Block</h2>
+      <p>Contoh kode HTML:</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>index.html</span>
+          <button class="copy-btn" onclick="copyCode(this, 'code2')">
+            Copy
+          </button>
+        </div>
+        <pre class="code-block" id="code2">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Contoh Halaman&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Selamat Datang&lt;/h1&gt;
+    &lt;p&gt;Ini adalah contoh paragraph.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>3. CSS Code Block</h2>
+      <p>Contoh kode CSS:</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>styles.css</span>
+          <button class="copy-btn" onclick="copyCode(this, 'code3')">
+            Copy
+          </button>
+        </div>
+        <pre class="code-block" id="code3">
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #2980b9;
+}</pre
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>4. Inline Code</h2>
+      <p>
+        Untuk menampilkan kode di dalam teks, gunakan:
+        <span class="inline-code">console.log("Hello World")</span>
+      </p>
+      <p>
+        Atau variabel seperti:
+        <span class="inline-code">const userName = "John"</span>
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>5. Code yang Bisa Diseleksi Langsung</h2>
+      <p>Klik dan drag untuk memilih semua kode:</p>
+
+      <div class="selectable-code">
+        npm install express node server.js git add . git commit -m "Initial
+        commit"
+      </div>
+    </div> -->
+
+    <script>
+      function copyCode(button, codeId) {
+        const codeElement = document.getElementById(codeId);
+        const text = codeElement.textContent;
+
+        // Menggunakan Clipboard API
+        navigator.clipboard
+          .writeText(text)
+          .then(function () {
+            // Mengubah teks tombol sementara
+            const originalText = button.textContent;
+            button.textContent = "Copied!";
+            button.classList.add("copied");
+
+            // Mengembalikan teks tombol setelah 2 detik
+            setTimeout(function () {
+              button.textContent = originalText;
+              button.classList.remove("copied");
+            }, 2000);
+          })
+          .catch(function (err) {
+            // Fallback untuk browser yang tidak mendukung Clipboard API
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+
+            // Feedback visual
+            button.textContent = "Copied!";
+            button.classList.add("copied");
+            setTimeout(function () {
+              button.textContent = "Copy";
+              button.classList.remove("copied");
+            }, 2000);
+          });
+      }
+
+      // Menambahkan event listener untuk double-click pada code block
+      document.querySelectorAll(".code-block").forEach(function (block) {
+        block.addEventListener("dblclick", function () {
+          const range = document.createRange();
+          range.selectNodeContents(this);
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+        });
+      });
+    </script>
   </body>
 </html>

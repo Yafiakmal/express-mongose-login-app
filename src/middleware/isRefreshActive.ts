@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-import { isRefreshTokenExist } from "../services/db_refreshtoken.js";
-import { successResponse } from "../types/http_response.js";
-import logger from "../utils/logger.js";
-import { HttpError } from "../error/HttpError.js";
-import { error } from "../label/error_label.js";
+import { isRefreshTokenExist } from "../services/db_refreshtoken";
+import { successResponse } from "../types/http_response";
+import logger from "../utils/logger";
+import { HttpError } from "../error/HttpError";
+import { error } from "../label/error_label";
 
 export default async (req: Request, res: Response, next: NextFunction) => {
   try {
