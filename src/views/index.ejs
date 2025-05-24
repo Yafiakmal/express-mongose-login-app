@@ -182,7 +182,7 @@ curl -X PATCH https://express-mongose-login-app.up.railway.app/api/account/verif
         <pre class="code-block" id="code3">
 curl -X DELETE https://express-mongose-login-app.up.railway.app/api/account/remove \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6ImpvaG5fZG9lIiwiaWF0IjoxNzQ4MDk0MjgzLCJleHAiOjE3NDgwOTQ1ODN9.QEuxXb1YWbBCO9us-rX3tMBSfZyyLUsH2ehFc5QdN6Q" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN_FROM_LOGIN_OR_REFRESH" \
   -d '{
     "password": "mySecurePassword123"
   }'
