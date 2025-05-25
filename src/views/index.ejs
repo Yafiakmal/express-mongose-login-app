@@ -82,9 +82,10 @@
 
       /* Style untuk inline code */
       .inline-code {
-        background-color: #e2e8f0;
-        color: #2d3748;
-        padding: 2px 6px;
+        background-color: #5b636f;
+        color: #e1e5eb;
+        padding: 4px 6px;
+        margin: 2px 3px;
         border-radius: 3px;
         font-family: "Courier New", monospace;
         font-size: 0.9em;
@@ -120,7 +121,14 @@
   </head>
   <body>
     <h1>JWT AUTHENTICATION REST API WITH EXPRESS AND MONGODB</h1>
-
+    <span class="inline-code">Docker</span>
+    <span class="inline-code">GIT</span>
+    <span class="inline-code">NodeJS</span>
+    <span class="inline-code">ExpressJS</span>
+    <span class="inline-code">Typescript</span>
+    <span class="inline-code">MongoDB</span>
+      <span class="inline-code">JWT Authentication</span>
+      <span class="inline-code">REST API</span>
     <div class="section">
       <h2>Account Functional</h2>
       <h3>1. POST /account/register</h3>
@@ -166,7 +174,8 @@ curl -X PATCH https://express-mongose-login-app.up.railway.app/api/account/verif
       </div>
       <p>Example Success Response:</p>
       <div class="selectable-code">
-        {"status":200,"message":"You have successfully verify your email","data":[{"username":"john_doe","email":"john@example.com"}]}% 
+        {"status":200,"message":"You have successfully verify your
+        email","data":[{"username":"john_doe","email":"john@example.com"}]}%
       </div>
 
       <h3>3. DELETE /account/remove</h3>
